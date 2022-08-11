@@ -1,0 +1,4 @@
+#Librerias necesarias
+Django==4.1
+djangorestframework==3.13.1
+drf-api-logger==1.1.10

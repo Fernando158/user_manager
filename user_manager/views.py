@@ -78,8 +78,13 @@ def diff_days(request):
         - diferencia de dias
     """
     if request.method == 'GET':
-        data = JSONParser().parse(request)
-        serializer = DiffDateSerializer(data=data)
+        error = 'Debes enviar los parametros de fecha_inicio y fecha_fin'
+        try:
+            data = JSONParser().parse(request)
+            serializer = DiffDateSerializer(data=data)
+        except Exception as e:
+            return JsonResponse({'error': error}, status=400)
+
         if serializer.is_valid():
             fecha_inicio = datetime.strptime(data['fecha_inicio'], '%d/%m/%Y')
             fecha_fin = datetime.strptime(data['fecha_fin'], '%d/%m/%Y')
